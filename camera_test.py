@@ -20,7 +20,7 @@ while(True):
     
     faces = faceCascade.detectMultiScale(
         gray,
-        scaleFactor=1.3,
+        scaleFactor=1.1,
         minNeighbors=5,
         minSize=(30, 30),
         #flags=cv2.cv.CV_HAAR_SCALE_IMAGE
@@ -31,11 +31,15 @@ while(True):
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
 
+        font = cv2.FONT_HERSHEY_DUPLEX
+        cv2.putText(frame, "Unknown", (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+
     cv2.imshow('frame', frame)
     print('Frame time: {} seconds'.format(time.time()-last_time))
 
     k = cv2.waitKey(30) & 0xff
     if k == 27: # press 'ESC' to quit
+        print("[INFO] Camera test stopped!")
         break
 cap.release()
 cv2.destroyAllWindows()
