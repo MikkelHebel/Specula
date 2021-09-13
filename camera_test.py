@@ -3,8 +3,8 @@ import cv2
 import os
 import time
 
-cascPath=os.path.dirname(cv2.__file__)+"/data/haarcascade_frontalface_default.xml"
-faceCascade = cv2.CascadeClassifier(cascPath)
+faceCascPath=os.path.dirname(cv2.__file__)+"/data/haarcascade_frontalface_default.xml"
+faceCascade = cv2.CascadeClassifier(faceCascPath)
 print("[INFO] Detector set!")
 
 last_time = time.time()
@@ -32,14 +32,15 @@ while(True):
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
 
         font = cv2.FONT_HERSHEY_DUPLEX
-        cv2.putText(frame, "Unknown", (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+        cv2.putText(frame, "Unknown", (y+h + 6, y+h - 6), font, 1.0, (255, 255, 255), 1)
 
-    cv2.imshow('frame', frame)
-    print('Frame time: {} seconds'.format(time.time()-last_time))
+        cv2.imshow('frame', frame)
+        print('Frame time: {} seconds'.format(time.time()-last_time))
 
     k = cv2.waitKey(30) & 0xff
     if k == 27: # press 'ESC' to quit
-        print("[INFO] Camera test stopped!")
+        print("[INFO] Key 30 (ESC) pressed!")
+        print("[INFO] Camera test stopped.")
         break
 cap.release()
 cv2.destroyAllWindows()
