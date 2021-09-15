@@ -5,7 +5,7 @@ import time
 
 faceCascPath=os.path.dirname(cv2.__file__)+"/data/haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(faceCascPath)
-print("[INFO] Detector set!")
+print("[INFO] Cascades set!")
 
 last_time = time.time()
 print("[INFO] Time set!")
@@ -17,7 +17,7 @@ cap.set(4,480) # set Height
 while(True):
     ret, frame = cap.read()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    
+
     faces = faceCascade.detectMultiScale(
         gray,
         scaleFactor=1.1,
@@ -39,6 +39,7 @@ while(True):
 
     k = cv2.waitKey(30) & 0xff
     if k == 27: # press 'ESC' to quit
+        print('Run time: {}'.format(time.time()))
         print("[INFO] Key 30 (ESC) pressed!")
         print("[INFO] Camera test stopped.")
         break

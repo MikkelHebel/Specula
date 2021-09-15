@@ -7,7 +7,7 @@ faceCascPath=os.path.dirname(cv2.__file__)+"/data/haarcascade_frontalface_defaul
 faceCascade = cv2.CascadeClassifier(faceCascPath)
 smileCascPath=os.path.dirname(cv2.__file__)+"/data/haarcascade_smile.xml"
 smileCascade = cv2.CascadeClassifier(smileCascPath)
-print("[INFO] Detector set!")
+print("[INFO] Cascades set!")
 
 last_time = time.time()
 print("[INFO] Time set!")
@@ -19,7 +19,7 @@ cap.set(4,480) # set Height
 while(True):
     ret, frame = cap.read()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    
+
     faces = faceCascade.detectMultiScale(
         gray,
         scaleFactor=1.1,
@@ -37,14 +37,14 @@ while(True):
 
         font = cv2.FONT_HERSHEY_DUPLEX
         cv2.putText(frame, "Unknown", (y+h + 6, y+h - 6), font, 1.0, (255, 255, 255), 1)
-        
+
         smile = smileCascade.detectMultiScale(
             roi_gray,
             scaleFactor=1.5,
             minNeighbors=15,
             minSize=(25, 25),
         )
-        
+
         for (xx, yy, ww, hh) in smile:
             cv2.rectangle(roi_color, (xx, yy), (xx + ww, yy + hh), (0, 255, 0), 2)
 
